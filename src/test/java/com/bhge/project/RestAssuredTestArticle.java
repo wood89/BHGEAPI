@@ -3,7 +3,6 @@ package com.bhge.project;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.hamcrest.Matchers;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,7 +80,7 @@ public class RestAssuredTestArticle {
         int statusCode = response.getStatusCode();
         Assert.assertEquals(statusCode, 400);
         String message = response.jsonPath().get("message");
-        Assert.assertEquals(message, "”validation error");
+        Assert.assertEquals(message, "validation error");
         System.out.println(response.getBody().asString());
     }
 
@@ -95,13 +94,5 @@ public class RestAssuredTestArticle {
         Assert.assertEquals(Long.parseLong(time), 1538041571929L);
         Assert.assertEquals(name, "sensor2");
         Assert.assertEquals(Integer.parseInt(value), 700);
-
-
-//        given()
-//                .get("https://url/get?from=1538041571929&to=1538041571930")
-//                .then()
-//                .body("[0].time", Matchers.equalTo(1538041571929L))
-//                .body("[0].name", Matchers.equalTo("sensor2"))
-//                .body("[0].value", Matchers.equalTo(700));
     }
 }
