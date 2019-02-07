@@ -35,9 +35,6 @@ public class RestAssuredTestArticle {
         requestBody.add(firstObject);
         requestBody.add(secondObject);
 
-        System.out.println(requestBody);
-
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.body(requestBody.toString());
