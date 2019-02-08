@@ -29,17 +29,8 @@ public class BHGETest extends TestBase {
         PostObject firstPostObject = new PostObject("sensor1", 500, 1538041571928L, true);
         PostObject secondPostObject = new PostObject("sensor2", 700, 1538041571929L, false);
 
-        JSONObject firstObject = new JSONObject();
-        firstObject.put("name", firstPostObject.getName());
-        firstObject.put("value", firstPostObject.getValue());
-        firstObject.put("time", firstPostObject.getTime());
-        firstObject.put("isOnline", firstPostObject.getOnline());
-
-        JSONObject secondObject = new JSONObject();
-        secondObject.put("name", secondPostObject.getName());
-        secondObject.put("value", secondPostObject.getValue());
-        secondObject.put("time", secondPostObject.getTime());
-        secondObject.put("isOnline", secondPostObject.getOnline());
+        JSONObject firstObject = getJsonObject(firstPostObject);
+        JSONObject secondObject = getJsonObject(secondPostObject)
 
         List<JSONObject> requestBody = new ArrayList<JSONObject>();
         requestBody.add(firstObject);
@@ -64,17 +55,8 @@ public class BHGETest extends TestBase {
         PostObject firstPostObject = new PostObject("sensor1", 500, 1L, true);
         PostObject secondPostObject = new PostObject("sensor2", 700, 1538041571929L, false);
 
-        JSONObject firstObject = new JSONObject();
-        firstObject.put("name", firstPostObject.getName());
-        firstObject.put("value", firstPostObject.getValue());
-        firstObject.put("time", firstPostObject.getTime());
-        firstObject.put("isOnline", firstPostObject.getOnline());
-
-        JSONObject secondObject = new JSONObject();
-        secondObject.put("name", secondPostObject.getName());
-        secondObject.put("value", secondPostObject.getValue());
-        secondObject.put("time", secondPostObject.getTime());
-        secondObject.put("isOnline", secondPostObject.getOnline());
+        JSONObject firstObject = getJsonObject(firstPostObject);
+        JSONObject secondObject = getJsonObject(secondPostObject);
 
         List<JSONObject> requestBody = new ArrayList<JSONObject>();
         requestBody.add(firstObject);
@@ -90,5 +72,17 @@ public class BHGETest extends TestBase {
 
         FailPostResponse failPostResponse = new FailPostResponse("validation error");
         assertEquals(failPostResponse.getMessage(), createUserResponse.jsonPath().getString("message"));
+    }
+
+
+    private JSONObject getJsonObject(PostObject postObject) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", postObject.getName());
+        jsonObject.put("value", postObject.getValue());
+        jsonObject.put("time", postObject.getTime());
+        jsonObject.put("isOnline", postObject.getOnline());
+
+        return jsonObject;
+
     }
 }
