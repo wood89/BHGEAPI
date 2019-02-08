@@ -30,7 +30,7 @@ public class BHGETest extends TestBase {
         PostObject secondPostObject = new PostObject("sensor2", 700, 1538041571929L, false);
 
         JSONObject firstObject = getJsonObject(firstPostObject);
-        JSONObject secondObject = getJsonObject(secondPostObject)
+        JSONObject secondObject = getJsonObject(secondPostObject);
 
         List<JSONObject> requestBody = new ArrayList<JSONObject>();
         requestBody.add(firstObject);
