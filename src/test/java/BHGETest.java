@@ -11,7 +11,7 @@ import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 
-public class UsersTest extends TestBase {
+public class BHGETest extends TestBase {
 
     @Test
     public void getSuccessRequestTest(){
