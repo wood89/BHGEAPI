@@ -28,5 +28,12 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "get?from=1538041571929&to=1538041571930": [
+    {
+      "time": 1538041571929,
+      "name": "sensor2",
+      "value": 70
+    }
+  ]
 }
