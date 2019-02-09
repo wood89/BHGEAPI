@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class BHGETest extends TestBase {
 
     private String partGetUrl = "/get?from=1538041571929&to=1538041571930";
-    private String partPostUrl = "/post";
+    private String partPostUrl = "/posts/1";
 
     @Test
     public void getSuccessRequestTest(){
@@ -30,18 +30,10 @@ public class BHGETest extends TestBase {
 
     @Test
     public void postSuccessRequestTest() {
-        PostObject firstPostObject = new PostObject("sensor1", 500, 1538041571928L, true);
-        PostObject secondPostObject = new PostObject("sensor2", 700, 1538041571929L, false);
-
-        JSONObject firstObject = getJsonObject(firstPostObject);
-        JSONObject secondObject = getJsonObject(secondPostObject);
-
-        List<JSONObject> requestBody = new ArrayList<JSONObject>();
-        requestBody.add(firstObject);
-        requestBody.add(secondObject);
+        JSONObject postRequest = getPostRequest();
 
         Response createUserResponse = REQUEST
-                .body(requestBody)
+                .body(postRequest)
                 .post(partPostUrl);
 
         createUserResponse
@@ -56,7 +48,22 @@ public class BHGETest extends TestBase {
 
     @Test
     public void postFailRequestTest() {
-        PostObject firstPostObject = new PostObject("sensor1", 500, 1L, true);
+        JSONObject postRequest = getPostRequest();
+
+        Response createUserResponse = REQUEST
+                .body(postRequest)
+                .post(partPostUrl);
+
+        createUserResponse
+                .then()
+                .assertThat().statusCode(400);
+
+        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
+        assertEquals(failPostResponse.getMessage(), createUserResponse.jsonPath().getString(MESSAGE));
+    }
+
+    private JSONObject getPostRequest() {
+        PostObject firstPostObject = new PostObject("sensor1", 500, 1538041571928L, true);
         PostObject secondPostObject = new PostObject("sensor2", 700, 1538041571929L, false);
 
         JSONObject firstObject = getJsonObject(firstPostObject);
@@ -66,16 +73,11 @@ public class BHGETest extends TestBase {
         requestBody.add(firstObject);
         requestBody.add(secondObject);
 
-        Response createUserResponse = REQUEST
-                .body(requestBody)
-                .post(partPostUrl);
+        JSONObject postRequest = new JSONObject();
+        postRequest.put(ID, 1);
+        postRequest.put(DATA, requestBody);
 
-        createUserResponse
-                .then()
-                .assertThat().statusCode(400);
-
-        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
-        assertEquals(failPostResponse.getMessage(), createUserResponse.jsonPath().getString(MESSAGE));
+        return postRequest;
     }
 
 

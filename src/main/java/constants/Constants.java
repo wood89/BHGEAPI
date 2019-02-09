@@ -14,4 +14,7 @@ public class Constants {
     public static final String VALIDATION_ERROR_MESSAGE = "validation error";
     public static final String MESSAGE ="message";
 
+    public static final String ID = "id";
+    public static final String DATA = "data";
+
 }
