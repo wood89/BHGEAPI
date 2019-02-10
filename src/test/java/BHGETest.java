@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static constants.Constants.*;
+import static org.hamcrest.core.Every.everyItem;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 
@@ -23,9 +24,9 @@ public class BHGETest extends TestBase {
                 .then()
                     .statusCode(200)
                 .and()
-                    .body(TIME, equalTo("1538041571929"))
+                    .body(TIME, everyItem(equalTo(1538041571929L)))
                     .body(NAME, equalTo( "sensor2"))
-                    .body(VALUE, equalTo("700"));
+                    .body(VALUE, everyItem(equalTo(700)));
     }
 
     @Test

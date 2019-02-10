@@ -20,9 +20,9 @@
   ],
   "gets": [
     {
-      "time": "1538041571929",
+      "time": 1538041571929,
       "name": "sensor2",
-      "value": "700"
+      "value": 700
     }
   ],
   "comments": [
