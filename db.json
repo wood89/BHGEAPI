@@ -1,8 +1,21 @@
 {
   "posts": [
     {
-      "code": "ok",
-      "description": "ok"
+      "id": 1,
+      "data": [
+        {
+          "name": "sensor1",
+          "value": 500,
+          "time": 1538041571928,
+          "isOnline": true
+        },
+        {
+          "name": "sensor2",
+          "value": 700,
+          "time": 1538041571929,
+          "isOnline": false
+        }
+      ]
     }
   ],
   "gets": [
@@ -13,12 +26,9 @@
     }
   ],
   "comments": [
-    { "id": 1,
-      "body": {
-        "code": "ok",
-        "description": "ok"
-      },
-      "postId": 1
+    {
+      "code": "ok",
+      "description": "ok"
     }
   ],
   "profile": {
