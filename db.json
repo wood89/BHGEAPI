@@ -20,14 +20,9 @@
   ],
   "gets": [
     {
-      "id": 1538041571929,
-      "data": [
-        {
-          "time": 1538041571929,
-          "name": "sensor2",
-          "value": 70
-        }
-      ]
+      "time": 1538041571929,
+      "name": "sensor2",
+      "value": 70
     }
   ],
   "comments": [
