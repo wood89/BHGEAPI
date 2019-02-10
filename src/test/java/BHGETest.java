@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class BHGETest extends TestBase {
 
     private String partGetUrl = "/gets";
-    private String partPostUrl = "/posts/1";
+    private String partPostUrl = "/posts";
 
     @Test
     public void getSuccessRequestTest(){
@@ -26,7 +26,7 @@ public class BHGETest extends TestBase {
                     .statusCode(200)
                 .and()
                     .body(TIME, everyItem(equalTo(1538041571929L)))
-                    .body(NAME, hasItem("sensor2" ))
+                    .body(NAME, hasItem("sensor2"))
                     .body(VALUE, everyItem(equalTo(700)));
     }
 
@@ -34,9 +34,13 @@ public class BHGETest extends TestBase {
     public void postSuccessRequestTest() {
         JSONObject postRequest = getPostRequest();
 
+        System.out.println(postRequest);
+
         Response createUserResponse = REQUEST
                 .body(postRequest)
                 .post(partPostUrl);
+
+        System.out.println(createUserResponse);
 
         createUserResponse
                 .then()
@@ -76,7 +80,6 @@ public class BHGETest extends TestBase {
         requestBody.add(secondObject);
 
         JSONObject postRequest = new JSONObject();
-        postRequest.put(ID, 1);
         postRequest.put(DATA, requestBody);
 
         return postRequest;
