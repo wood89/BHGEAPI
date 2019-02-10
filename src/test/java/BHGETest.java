@@ -23,9 +23,9 @@ public class BHGETest extends TestBase {
                 .then()
                     .statusCode(200)
                 .and()
-                    .body(TIME, equalTo(1538041571929L))
+                    .body(TIME, equalTo("1538041571929"))
                     .body(NAME, equalTo( "sensor2"))
-                    .body(VALUE, equalTo(700));
+                    .body(VALUE, equalTo("700"));
     }
 
     @Test
