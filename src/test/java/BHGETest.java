@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BHGETest extends TestBase {
 
-    private String partGetUrl = "/get?from=1538041571929&to=1538041571930";
+    private String partGetUrl = "/gets";
     private String partPostUrl = "/posts/1";
 
     @Test
