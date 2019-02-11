@@ -14,8 +14,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class BHGETest extends TestBase {
 
-    private String partGetUrl = "/gets";
-    private String partPostUrl = "/posts";
+    private String partGetUrl = "/get";
+    private String partPostUrl = "/post";
     private String postSuccessUrl = "/postSuccess";
     private String postFailedUrl = "/postFailed";
 
@@ -33,9 +33,9 @@ public class BHGETest extends TestBase {
     @Test
     public void postSuccessRequestTest() {
 
-        Response createUserResponse = REQUEST
+        Response postResponse = REQUEST
                 .body("{\n" +
-                        "      \"id\": 1,\n" +
+                        "      \"id\": 81,\n" +
                         "      \"data\": [\n" +
                         "        {\n" +
                         "          \"name\": \"sensor1\",\n" +
@@ -53,7 +53,7 @@ public class BHGETest extends TestBase {
                         "    }")
                 .post(partPostUrl);
 
-        createUserResponse
+        postResponse
                 .then()
                     .assertThat().statusCode(201);
 
@@ -65,11 +65,7 @@ public class BHGETest extends TestBase {
                 .and()
                   .body(CODE, hasItem(successPostResponse.getCode()))
                   .body(DESCRIPTION, hasItem(successPostResponse.getDescription()));
-    }
 
-
-    @Test
-    public void postFailRequestTest() {
 //        JSONObject postRequest = getPostRequest();
 //
 //        Response createUserResponse = REQUEST
@@ -78,15 +74,20 @@ public class BHGETest extends TestBase {
 //
 //        createUserResponse
 //                .then()
-//                .assertThat().statusCode(400);
+//                .assertThat().statusCode(201);
 //
-//        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
-//        assertEquals(failPostResponse.getMessage(), createUserResponse.jsonPath().getString(MESSAGE));
+//         SuccessPostResponse successPostResponse = new SuccessPostResponse(OK, OK);
+//        assertEquals(successPostResponse.getCode(), postResponse.jsonPath().getString(CODE));
+//        assertEquals(successPostResponse.getDescription(), postResponse.jsonPath().getString(DESCRIPTION));
+    }
 
 
-        Response createUserResponse = REQUEST
+    @Test
+    public void postFailRequestTest() {
+
+        Response postResponse = REQUEST
                 .body("{\n" +
-                        "      \"id\": 2,\n" +
+                        "      \"id\": 82,\n" +
                         "      \"data\": [\n" +
                         "        {\n" +
                         "          \"name\": \"sensor1\",\n" +
@@ -97,7 +98,7 @@ public class BHGETest extends TestBase {
                         "    }")
                 .post(partPostUrl);
 
-        createUserResponse
+        postResponse
                 .then()
                 .assertThat().statusCode(201);
 
@@ -105,9 +106,23 @@ public class BHGETest extends TestBase {
 
         REQUEST.get(postFailedUrl)
                 .then()
-                .statusCode(200)
+                  .statusCode(200)
                 .and()
-                .body(CODE, hasItem(failPostResponse.getMessage()));
+                  .body(MESSAGE, hasItem(failPostResponse.getMessage()));
+
+
+//        JSONObject postRequest = getPostRequest();
+//
+//        Response postResponse = REQUEST
+//                .body(postRequest)
+//                .post(partPostUrl);
+//
+//        postResponse
+//                .then()
+//                .assertThat().statusCode(400);
+//
+//        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
+//        assertEquals(failPostResponse.getMessage(), postResponse.jsonPath().getString(MESSAGE));
     }
 
     private PostObject getPostRequest() {
