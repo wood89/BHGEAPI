@@ -1,27 +1,27 @@
-package models;
+package models.post;
 
-public class PostObject {
+public class UserInfo {
+
     public String name;
     public Integer value;
     public Long time;
     public Boolean isOnline;
 
-    public PostObject(){
+    public UserInfo() {
     }
 
-    public PostObject(String fName, Integer fValue, Long fTime){
-        this.name = fName;
-        this.value = fValue;
-        this.time = fTime;
+    public UserInfo(String name, Integer value, Long time) {
+        this.name = name;
+        this.value = value;
+        this.time = time;
     }
 
-    public PostObject(String fName, Integer fValue, Long fTime, Boolean fIsOnline){
-        this.name = fName;
-        this.value = fValue;
-        this.time = fTime;
-        this.isOnline = fIsOnline;
+    public UserInfo(String name, Integer value, Long time, Boolean isOnline) {
+        this.name = name;
+        this.value = value;
+        this.time = time;
+        this.isOnline = isOnline;
     }
-
 
     public String getName() {
         return name;
@@ -57,7 +57,7 @@ public class PostObject {
 
     @Override
     public String toString() {
-        return "PostObject{" +
+        return "UserInfo{" +
                 "name='" + name + '\'' +
                 ", value=" + value +
                 ", time=" + time +

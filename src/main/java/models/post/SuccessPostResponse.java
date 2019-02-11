@@ -1,4 +1,4 @@
-package models;
+package models.post;
 
 public class SuccessPostResponse {
 

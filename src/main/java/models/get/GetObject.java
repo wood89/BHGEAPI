@@ -1,4 +1,4 @@
-package models;
+package models.get;
 
 public class GetObject {
 
