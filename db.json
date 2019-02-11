@@ -31,6 +31,9 @@
       "description": "ok"
     }
   ],
+  "postFailed": {
+    "message": "validation error"
+  },
   "profile": {
     "name": "typicode"
   }

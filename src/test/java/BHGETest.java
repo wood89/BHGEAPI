@@ -1,4 +1,5 @@
 import io.restassured.response.Response;
+import models.post.FailPostResponse;
 import models.post.PostObject;
 import models.post.SuccessPostResponse;
 import models.post.UserInfo;
@@ -16,6 +17,7 @@ public class BHGETest extends TestBase {
     private String partGetUrl = "/gets";
     private String partPostUrl = "/posts";
     private String postSuccessUrl = "/postSuccess";
+    private String postFailedUrl = "/postFailed";
 
     @Test
     public void getSuccessRequestTest(){
@@ -33,7 +35,7 @@ public class BHGETest extends TestBase {
 
         Response createUserResponse = REQUEST
                 .body("{\n" +
-                        "      \"id\": 71,\n" +
+                        "      \"id\": 1,\n" +
                         "      \"data\": [\n" +
                         "        {\n" +
                         "          \"name\": \"sensor1\",\n" +
@@ -66,8 +68,8 @@ public class BHGETest extends TestBase {
     }
 
 
-//    @Test
-//    public void postFailRequestTest() {
+    @Test
+    public void postFailRequestTest() {
 //        JSONObject postRequest = getPostRequest();
 //
 //        Response createUserResponse = REQUEST
@@ -80,7 +82,33 @@ public class BHGETest extends TestBase {
 //
 //        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
 //        assertEquals(failPostResponse.getMessage(), createUserResponse.jsonPath().getString(MESSAGE));
-//    }
+
+
+        Response createUserResponse = REQUEST
+                .body("{\n" +
+                        "      \"id\": 2,\n" +
+                        "      \"data\": [\n" +
+                        "        {\n" +
+                        "          \"name\": \"sensor1\",\n" +
+                        "          \"value\": 500,\n" +
+                        "          \"isOnline\": true\n" +
+                        "        }\n" +
+                        "      ]\n" +
+                        "    }")
+                .post(partPostUrl);
+
+        createUserResponse
+                .then()
+                .assertThat().statusCode(201);
+
+        FailPostResponse failPostResponse = new FailPostResponse(VALIDATION_ERROR_MESSAGE);
+
+        REQUEST.get(postFailedUrl)
+                .then()
+                .statusCode(200)
+                .and()
+                .body(CODE, hasItem(failPostResponse.getMessage()));
+    }
 
     private PostObject getPostRequest() {
         UserInfo firstUser = new UserInfo("sensor1", 500, 1538041571928L, true);
