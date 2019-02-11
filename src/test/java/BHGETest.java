@@ -14,8 +14,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class BHGETest extends TestBase {
 
-    private String partGetUrl = "/get";
-    private String partPostUrl = "/post";
+    private String partGetUrl = "/gets";
+    private String partPostUrl = "/posts";
     private String postSuccessUrl = "/postSuccess";
     private String postFailedUrl = "/postFailed";
 
